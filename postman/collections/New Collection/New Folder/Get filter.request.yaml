@@ -1,0 +1,10 @@
+$kind: http-request
+name: Get filter
+url: localhost:8080/product/?maxPrice=500&sort=asc
+method: GET
+queryParams:
+  - key: maxPrice
+    value: "500"
+  - key: sort
+    value: asc
+order: 4342773923857161

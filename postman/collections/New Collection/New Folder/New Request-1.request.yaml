@@ -1,0 +1,5 @@
+$kind: http-request
+name: New Request
+url: localhost:8080/producto
+method: GET
+order: 3474212302765517

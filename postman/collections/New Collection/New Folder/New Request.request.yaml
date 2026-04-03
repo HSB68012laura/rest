@@ -1,0 +1,16 @@
+$kind: http-request
+name: New Request
+url: http://localhost:8080/product
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \"id\": 6,\r
+
+    \"name\": \"Server\",\r
+
+    \"price\": 3500.0\r
+
+    }\r\n"
+order: 1774975362171
