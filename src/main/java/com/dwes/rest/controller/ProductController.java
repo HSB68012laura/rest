@@ -2,6 +2,13 @@ package com.dwes.rest.controller;
 
 import com.dwes.rest.model.Product;
 import com.dwes.rest.service.ProductService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,9 +20,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/product/")
 @RequiredArgsConstructor
+@Tag(name = "Products", description = "Gestión básica de productos")
 //@CrossOrigin(originPatterns = "http://localhost:[*]",
         //methods = RequestMethod.GET)
-//@Tag(name = "Products", description = "Gestión básica de productos")
+
 public class ProductController {
 
     private final ProductService productService;
@@ -29,7 +37,7 @@ public class ProductController {
         return productService.query(max, sortDirection);
     }
 
-    /*@Operation(
+    @Operation(
             summary = "Obtener un producto concreto",
             description = "Permite obtener la información de un producto si se le proporciona un id",
             tags = {"params", "products", "detail"}
@@ -53,26 +61,27 @@ public class ProductController {
     @GetMapping("/{id:[0-9]+}")
     public Product getById(@Parameter(description = "Identificador del producto") @PathVariable Long id) {
         return productService.get(id);
-    }*/
-    @GetMapping("/{id:[0-9]+}")
+    }
+    /*@GetMapping("/{id:[0-9]+}")
     public Product getById(@PathVariable long id) {
         return productService.get(id);
-    }
+    }*/
 
     @PostMapping
     public ResponseEntity<Product> create(
-           /* @io.swagger.v3.oas.annotations.parameters.RequestBody(
+           @io.swagger.v3.oas.annotations.parameters.RequestBody(
                     description = "Producto a crear", required = true,
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = Product.class),
                             examples = @ExampleObject("""
                                 {
-                                    "name": "New product",
-                                    "price": 123.45
+                                    "id": 3,
+                                    "name": "Headphones",
+                                    "price": 150.0
                                 }
                                 """)
                     )
-            )*/
+            )
             @RequestBody Product product) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(productService.add(product));
